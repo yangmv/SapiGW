@@ -41,7 +41,7 @@ function _M.set()
 		ngx.var.my_upstream = default_upstream
 		table.remove(url_path_list,1)
 		local new_uri = tools.list_to_str(url_path_list,'/')
-		ngx.log(ngx.ERR,'new_uri-------->',new_uri)
+		ngx.log(ngx.ERR,'new_urinew_uri-------->',new_uri)
 		ngx.req.set_uri(new_uri, false)
 	else
 		return ngx.exit(404)
