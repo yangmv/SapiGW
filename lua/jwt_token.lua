@@ -1,6 +1,5 @@
 module("jwt_token", package.seeall)
 local jwt = require "resty.jwt"
-local token_secret = "pXy5Fb4i%*83AIiOq18iodGq4ODQyMzc4lz7yI6ImF1dG"
 
 function encode_auth_token(uid)
     local jwt_token = jwt:sign(

@@ -1,18 +1,12 @@
 local tools = require "tools"
-local host = ngx.var.http_host
+-- local host = ngx.var.http_host
+local host = gw_domain_name
 local uri = ngx.var.uri
+local user_info = ngx.shared.user_info
 
 local _M = {}
-function _M.set()
-
-	ngx.log(ngx.ERR, "uri-------->"..uri)
-	if uri == '/nginx-logo.png' or uri == '/poweredby.png' then
-		return
-	end
-
-	local url_path_list = tools.split(uri, '/')
-	local svc_code = url_path_list[1]
-
+function _M.set(real_new_uri)
+	local svc_code = user_info.svc_code
 	local default_upstream = 'None'
 	if rewrite_conf[host] ~= nil then
 		local data = {}
@@ -39,10 +33,9 @@ function _M.set()
 	end
 	if default_upstream ~= "None" then
 		ngx.var.my_upstream = default_upstream
-		table.remove(url_path_list,1)
-		local new_uri = tools.list_to_str(url_path_list,'/')
-		ngx.log(ngx.ERR,'new_urinew_uri-------->',new_uri)
-		ngx.req.set_uri(new_uri, false)
+	 	local real_uri = user_info.real_uri
+		-- ngx.log(ngx.ERR,'real_uri-------->',real_uri)
+		ngx.req.set_uri(real_uri, false)
 	else
 		return ngx.exit(404)
 	end

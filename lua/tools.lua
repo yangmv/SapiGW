@@ -30,3 +30,13 @@ function match(s,p)
     local ret = string.match(s,'^'..p)
     return ret
 end
+
+
+function is_include(value, tab)
+    for k,v in ipairs(tab) do
+      if v == value then
+          return true
+      end
+    end
+    return false
+end

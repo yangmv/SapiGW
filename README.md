@@ -130,9 +130,19 @@ Failed requests:        985
 
 可以看到,差不多有15个请求是成功的
 
+# 五、白名单
+在configs.lua文件中配置white_list,配置示例如下
+```lua
+white_list = {
+    'account',
+--    'nginx-logo.png',
+--    'poweredby.png'
+}
+```
+配置白名单的uri则会跳过权限验证
 
 
-# 五、日志记录
+# 六、日志记录
 
 在configs.lua文件中配置log地址及redis channel
 
