@@ -1,5 +1,5 @@
 # SapiGW项目介绍
-炫踪API网关系统,是基于openresty + Lua开发的一套API网关系统,主要功能如下：
+SapiGW网关系统,是基于openresty + Lua开发的一套API网关系统,主要功能如下：
 
 - API鉴权
 
@@ -9,10 +9,7 @@
 
 - 日志记录
 
-
-
 # 一、openresty部署
-
 ```bash
 # yum部署(推荐)
 yum install yum-utils
@@ -33,19 +30,17 @@ ln -s /usr/local/openresty-1.13.6.2/ /usr/local/openresty
 ln -s /usr/local/openresty/bin/resty /usr/bin/resty
 ```
 
-
 # 二、项目部署及配置
 
 ```bash
 git clone https://github.com/yangmv/SapiGW.git
-mv SapiGW/* /usr/local/openresty/nginx
+\cp -arp SapiGW/* /usr/local/openresty/nginx
 # vim conf/nginx.conf
 # 修改 resolver 10.0.0.1;     配置DNS服务器
 # 修改 lua_code_cache on;     线上环境设置为on
 /usr/local/openresty/nginx/sbin/nginx   #启动服务
 ```
 
-    
 # 三、使用配置,注册API
 要接入API网关系统，则要先进行注册，注册方式如下：
 
@@ -67,13 +62,10 @@ rewrite_conf = {
 				uri = "/cmdb",
 				rewrite_upstream = "aaaa.xxx.net.cn:8888"
 			},
-
         }
     }
 }
 ```
-
-
 
 如上可以看到，注册了2个服务【devops】和【cmdb】
 
@@ -81,18 +73,15 @@ rewrite_conf = {
 
 # 四、API鉴权权限
 
-在configs.lua文件中配置redis信息和刷新redis权限接口信息，此信息由【权限系统】提供
+在configs.lua文件中配置redis信息和刷新redis权限接口信息，此信息由权限系统【SuperMG】提供
 
 权限验证步骤如下：
-
 - 获取cook信息，得到auth_key
 - 根据私钥及加密算法解密auth_key
 - 得到用户ID
 - 获取当前uri及method
 - redis中查询用户id的权限列表进行匹配
 - 匹配不通过则rewrite login
-
-
 
 在这里来测试 devops服务的job接口
 
@@ -146,8 +135,6 @@ Failed requests:        985
 ```lua
 white_list = {
     'account',
---    'nginx-logo.png',
---    'poweredby.png'
 }
 ```
 配置白名单的uri则会跳过权限验证

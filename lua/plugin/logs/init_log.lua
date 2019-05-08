@@ -21,10 +21,13 @@ function _M.send()
     local new_data = json.encode(data)
 
     if method == "GET" then
+        -- GET请求log存放本地
+        ngx.log(ngx.ERR,'method--->',method)
         file = io.open(logs_file, "a+")
         file:write(new_data..'\n')
         file:close()
     else
+        -- 非GET请求放入队列
         my_cache.publish(redis_config.channel,new_data)
     end
 end

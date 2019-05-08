@@ -4,29 +4,12 @@ local user_info = ngx.shared.user_info
 local tools = require "tools"
 
 local _M = {}
-
-function get_svc_code()
-    local url_path_list = tools.split(ngx.var.uri, '/')
-    local svc_code = url_path_list[1]
-	if svc_code == nil then
-		return ngx.exit(404)
-    end
-    table.remove(url_path_list,1)
-    local new_uri = tools.list_to_str(url_path_list,'/')
-    local real_url_path_list = tools.split(new_uri, '?')
-    local real_uri = real_url_path_list[1]
-    -- ngx.log(ngx.ERR,'real_uri--->',real_uri)
-    user_info['svc_code'] = svc_code
-    user_info['real_uri'] = real_uri
-    return svc_code
-end
-
 function _M.check()
     -- 获取白名单
-    local svc_code = get_svc_code()
+    local svc_code = user_info.svc_code
     -- ngx.log(ngx.ERR,'svc_code--->',svc_code)
     local is_white = tools.is_include(svc_code,white_list)
-    -- ngx.log(ngx.ERR,'is_white--->',is_white)
+    -- ngx.log(ngx.ERR,'--->',is_white)
 
     if is_white == false then
         -- 获取cook
