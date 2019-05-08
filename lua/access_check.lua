@@ -5,6 +5,6 @@ local upstream = require "upstream"
 
 limit_req.incoming()     --限速,限制每秒请求数
 auth_check.check()      --权限验证
--- init_log.send(real_new_uri)          --记录日志
+init_log.send(real_new_uri)          --记录日志
 upstream.set()          --匹配upstream
 
