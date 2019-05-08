@@ -77,11 +77,10 @@ rewrite_conf = {
 
 权限验证步骤如下：
 - 获取cook信息，得到auth_key
-- 根据私钥及加密算法解密auth_key
-- 得到用户ID
+- 根据私钥及加密算法解密auth_key,得到用户id 
 - 获取当前uri及method
-- redis中查询用户id的权限列表进行匹配
-- 匹配不通过则rewrite login
+- 请求【权限系统】认证接口进行鉴权
+- 鉴权不通过则rewrite login
 
 在这里来测试 devops服务的job接口
 
