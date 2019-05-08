@@ -5,13 +5,24 @@
 
 - API 限速
 
--  日志记录
+- 白名单
+
+- 日志记录
 
 
 
 # 一、openresty部署
 
+```bash
+# yum部署(推荐)
+yum install yum-utils
+yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
+yum install openresty
+yum install openresty-resty
 ```
+
+```bash
+# 源码部署
 wget https://openresty.org/download/openresty-1.13.6.2.tar.gz
 tar zxf openresty-1.13.6.2.tar.gz && cd openresty-1.13.6.2
 ./configure --prefix=/usr/local/openresty-1.13.6.2 \
@@ -22,19 +33,19 @@ ln -s /usr/local/openresty-1.13.6.2/ /usr/local/openresty
 ln -s /usr/local/openresty/bin/resty /usr/bin/resty
 ```
 
+
+# 二、项目部署及配置
+
+```bash
+git clone https://github.com/yangmv/SapiGW.git
+mv SapiGW/* /usr/local/openresty/nginx
+# vim conf/nginx.conf
+# 修改 resolver 10.0.0.1;     配置DNS服务器
+# 修改 lua_code_cache on;     线上环境设置为on
+/usr/local/openresty/nginx/sbin/nginx   #启动服务
 ```
-#yum部署
-yum install yum-utils
-yum-config-manager --add-repo
-yum install openresty
-yum install openresty-resty
-```
 
-# 二、conf/nginx.conf
-    * 修改 resolver 172.16.0.21; 为resolver DNS服务器。
-    * 修改 lua_code_cache on; 线上环境设置为on
-
-
+    
 # 三、使用配置,注册API
 要接入API网关系统，则要先进行注册，注册方式如下：
 
