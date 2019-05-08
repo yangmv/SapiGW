@@ -19,7 +19,7 @@ auth_api = 'http://mg.yangmv.com:8888'                          -- [权限系统
 token_secret = "pXy5Fb4i%*83AIiOq18iodGq4ODQyMzc4lz7yI6ImF1dG"  -- JWT令牌密钥,需和[权限系统] 服务端的key一致
 rewrite_cache_token = '8b888a62-3edb-4920-b446-697a472b4001'    -- 刷新redis权限接口的token,需和[权限系统]服务端的key一致
 auth_check_uri = '/v1/mg/auth_check/'                           -- 权限认证接口
-rewrite_cache_uri = '/v1/mg/renew_verify/'                      -- 刷新权限到redis接口
+rewrite_cache_uri = '/v1/mg/renew_verify/'                      -- 权限刷新接口
 
 -- 并发限流配置
 limit_conf = {
