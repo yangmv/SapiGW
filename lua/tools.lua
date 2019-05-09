@@ -9,12 +9,15 @@ function split(s, p)
     return rt
 end
 
-function list_to_str(list,x)
+function list_to_str(list,x,p)
     local st = ''
     for i,v in ipairs(list) do
         st = st..x..v
     end
-    st = st..x
+    local tag = string.sub(p,-1)
+    if tag == '/' then
+        st = st..x
+    end
     return st
 end
 

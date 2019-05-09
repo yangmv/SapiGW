@@ -13,10 +13,9 @@ function get_svc_code()
 		return ngx.exit(404)
     end
     table.remove(url_path_list,1)
-    local new_uri = tools.list_to_str(url_path_list,'/')
+    local new_uri = tools.list_to_str(url_path_list,'/',ngx.var.uri)
     local real_url_path_list = tools.split(new_uri, '?')
     local real_uri = real_url_path_list[1]
-    -- ngx.log(ngx.ERR,'real_uri--->',real_uri)
     user_info['svc_code'] = svc_code
     user_info['real_uri'] = real_uri
     return svc_code

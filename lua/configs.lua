@@ -41,15 +41,11 @@ rewrite_conf = {
             },
             {
                 uri = "/cron",
-                rewrite_upstream = "cron.yangmv.cn:5001"
+                rewrite_upstream = "cron.yangmv.com:5001"
             },
             {
                 uri = "/cmdb",
                 rewrite_upstream = "cmdb.opendevops.cn:8002"
-            },
-            {
-                uri = "/k8s",
-                rewrite_upstream = "k8s.opendevops.cn:8001"
             }
         }
     }

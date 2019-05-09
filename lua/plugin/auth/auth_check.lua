@@ -41,6 +41,7 @@ function _M.check()
 
         -- 根据用户id获取权限列表
         local is_permission =  my_verify.get_verify(user_id,uri,method) -- 从权限系统redis获取
+        -- ngx.log(ngx.ERR,'is_permission-->',is_permission)
         if is_permission ~= true then
             -- 第一次没有就先刷新下redis
             my_verify.write_verify(user_id)

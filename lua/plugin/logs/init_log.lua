@@ -22,7 +22,7 @@ function _M.send()
 
     if method == "GET" then
         -- GET请求log存放本地
-        ngx.log(ngx.ERR,'method--->',method)
+        -- ngx.log(ngx.ERR,'method--->',method)
         file = io.open(logs_file, "a+")
         file:write(new_data..'\n')
         file:close()

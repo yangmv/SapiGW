@@ -45,6 +45,7 @@ function get_verify(user_id,uri,method)
         }
     )
     if res.status == 200 then
+        -- ngx.log(ngx.ERR,'res----->',res.body)
         ret = json.decode(res.body)
         if ret.status == 0 then
             return true
